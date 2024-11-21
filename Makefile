@@ -1,11 +1,11 @@
-.PHONY: rag ragless
+.PHONY: start
 
-rag:
+start:
 	touch text.txt
-	python3 -m venv .venv 
+	@if [ ! -d ".venv" ]; then \
+		python3 -m venv .venv; \
+	fi
 	. .venv/bin/activate && \
-	python3 -m pip install boto3 pdfplumber && \
+	pip install tiktoken boto3 pdfplumber openai langchain chainlit langchain-community && \
 	python3 upload.py
-
-ragless:
-	ollama run llama3.2
+	#python3 localrag.py
